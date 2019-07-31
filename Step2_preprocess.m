@@ -1,8 +1,11 @@
-addpath('C:\Users\abednar2\Desktop\TRF_sample_analysis\EEGlabToolbox\eeglab14_1_2b'); % add EEGLAB toolbox path
+study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
+
+addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
+rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\']));
 
 %% load EEG
 subject_name='EL'; 
-mat_file_path='C:\Users\abednar2\Desktop\TRF_sample_analysis\eegMatFiles\';
+mat_file_path=[study_path 'eegMatFiles\'];
 load([mat_file_path subject_name '.mat'])
 
 % you can plot the data anytime in eeglab GUI: type 'eeglab redraw' in Command
@@ -22,13 +25,13 @@ EEG.external_electrodes=EEG.data(129:end,:); % save external electrodes (mastoid
 EEG = pop_select( EEG,'channel', [1:128]); % keep only cortical channels; this will erase mastoids from the EEG.data sttructure
 
 %% Load electrode channel locations from a file
-load('C:\Users\abednar2\Desktop\TRF_sample_analysis\128chanlocs.mat')
+load([study_path '128chanlocs.mat'])
 EEG.chanlocs=chanlocs;
 
 %% remove noisy channels... threshold can be modified
 indelec1=[]; indelec2=[]; indelec3=[];
-% [~, indelec1] = pop_rejchan(EEG, 'elec',1:EEG.nbchan,'threshold',5,'norm','on','measure','kurt');
-% [~, indelec2] = pop_rejchan(EEG, 'elec',1:EEG.nbchan,'threshold',5,'norm','on','measure','spec');
+[~, indelec1] = pop_rejchan(EEG, 'elec',1:EEG.nbchan,'threshold',5,'norm','on','measure','kurt');
+[~, indelec2] = pop_rejchan(EEG, 'elec',1:EEG.nbchan,'threshold',5,'norm','on','measure','spec');
 [~, indelec3] = pop_rejchan(EEG, 'elec',1:EEG.nbchan ,'threshold',5,'norm','on','measure','prob');
 bad_chans=unique([indelec1 indelec2 indelec3]); 
 EEG = pop_select( EEG,'nochannel',bad_chans);
@@ -77,6 +80,6 @@ EEG.epochdescription=epoch_trig_types;
 %.. could be saved somewhere else as well
 
 %% save preprocessed eeg
-mat_file_path_preprocessed='C:\Users\abednar2\Desktop\TRF_sample_analysis\eegMatFiles_preprocessed\';
+mat_file_path_preprocessed=[study_path 'eegMatFiles_preprocessed\'];
 if ~exist(mat_file_path_preprocessed, 'dir'); mkdir(mat_file_path_preprocessed); end % create folder if does not exist
 save([mat_file_path_preprocessed subject_name '.mat'], 'EEG','-v7.3') % save eeg data as *.mat
