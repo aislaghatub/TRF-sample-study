@@ -1,9 +1,11 @@
-addpath('C:\Users\abednar2\Desktop\TRF_sample_analysis\mTRF_1.3'); % add TRF toolbox to path
+study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
+
+addpath([study_path 'mTRF_1.3']); % add TRF toolbox to path
 
 %% load EEG
 subject_name='EL'; 
-mat_file_path='C:\Users\abednar2\Desktop\TRF_sample_analysis\eegMatFiles_preprocessed\';
-load([mat_file_path subject_name '.mat'])
+mat_file_path_preprocessed=[study_path 'eegMatFiles_preprocessed\'];
+load([mat_file_path_preprocessed subject_name '.mat'])
 
 %% Add data to cell-array
 eeg_cell_arr={};
@@ -13,7 +15,7 @@ end
 
 %% Load stimuli envelopes into cell-array
 trial_order=EEG.epochdescription; %that is where we stored our labels for epoched EEG
-envelope_file_path='C:\Users\abednar2\Desktop\TRF_sample_analysis\audioEnvelopes\';
+envelope_file_path=[study_path 'audioEnvelopes\'];
 envelope_template='gammachirp_256bands_';
 stim_cell_arr={};
 for i=1:EEG.trials
@@ -57,9 +59,10 @@ xlabel('Lags')
 ylabel('Weights')
 
 %% plot average TRF model weights for a selected timelag and best lambda AKA topoplot
-addpath('C:\Users\abednar2\Desktop\TRF_sample_analysis\EEGlabToolbox\eeglab14_1_2b'); % add EEGLAB toolbox path
-load('C:\Users\abednar2\Desktop\TRF_sample_analysis\128chanlocs.mat')
-eeglab
+addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
+rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\']));
+load([study_path '128chanlocs.mat']);
+
 selected_lag=10;
 avg_model=squeeze(mean(model(:,best_lambda_ind,selected_lag,:),1)); % average across trials
 
