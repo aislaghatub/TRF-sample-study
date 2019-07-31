@@ -2,8 +2,7 @@
 study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
 
 addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
-rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\biosig\maybe-missing\']));
-
+rmvpath([study_path 'EEGlabToolbox\eeglab14_1_2b'\plugins\Biosig3.3.0\biosig\maybe-missing\freemat3.5\lcm.m)
 %IMPORTANT: open eeglab by typing "eeglab" in the command window;
 %File->Memory and other options-> UNTICK "If set, use single precision...."->Click OK
 
