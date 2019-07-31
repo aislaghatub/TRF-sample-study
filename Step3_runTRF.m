@@ -68,3 +68,8 @@ avg_model=squeeze(mean(model(:,best_lambda_ind,selected_lag,:),1)); % average ac
 
 figure(4)
 topoplot(avg_model,chanlocs)
+
+%% plot correlation topoplot
+figure(5)
+r_topo=squeeze(mean(r(:,best_lambda_ind,:),1));
+topoplot(r_topo,chanlocs);
