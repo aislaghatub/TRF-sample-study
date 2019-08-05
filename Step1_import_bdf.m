@@ -1,10 +1,10 @@
 % Converts *.bdf into Matlab/EEGlab matrix
 study_path='C:\Users\aosulli4\Documents\GitHub\TRF-sample-study\';
 
-addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
-rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\biosig\maybe-missing\']));
+addpath([study_path 'EEGlabToolbox\eeglab14_1_2b']); % add EEGLAB toolbox path
+eeglab
 
-%IMPORTANT: open eeglab by typing "eeglab" in the command window;
+%%************************NB***********************
 %File->Memory and other options-> UNTICK "If set, use single precision...."->Click OK
 
 subject_name='EL';
