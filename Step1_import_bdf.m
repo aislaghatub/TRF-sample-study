@@ -1,5 +1,5 @@
 % Converts *.bdf into Matlab/EEGlab matrix
-study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
+study_path='C:\Users\aosulli4\Documents\GitHub\TRF-sample-study\';
 
 addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
 rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\biosig\maybe-missing\']));
