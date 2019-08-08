@@ -4,8 +4,9 @@ addpath([study_path 'mTRF_1.3']); % add TRF toolbox to path
 
 %% load EEG
 subject_name='EL'; 
+ref_type = 'mast'; % avg
 mat_file_path_preprocessed=[study_path 'eegMatFiles_preprocessed\'];
-load([mat_file_path_preprocessed subject_name '.mat'])
+load([mat_file_path_preprocessed subject_name '_' ref_type '.mat'])
 
 %% Add data to cell-array
 eeg_cell_arr={};
