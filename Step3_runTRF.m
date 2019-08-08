@@ -1,4 +1,4 @@
-study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
+study_path='C:\Users\aosulli4\Documents\GitHub\TRF-sample-study\';
 
 addpath([study_path 'mTRF_1.3']); % add TRF toolbox to path
 
@@ -59,7 +59,8 @@ xlabel('Lags')
 ylabel('Weights')
 
 %% plot average TRF model weights for a selected timelag and best lambda AKA topoplot
-addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
+addpath([study_path 'EEGlabToolbox\eeglab14_1_2b']); % add EEGLAB toolbox path
+eeglab
 rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\']));
 load([study_path '128chanlocs.mat']);
 
