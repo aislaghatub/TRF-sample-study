@@ -1,0 +1,5 @@
+TRF Sample Study Help
+
+Please read and follow this tutorial. It will teach you how to read in and process EEG data
+https://sccn.ucsd.edu/wiki/EEGLAB_TUTORIAL_OUTLINE
+
