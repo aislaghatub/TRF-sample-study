@@ -33,7 +33,8 @@ avg_r=mean(mean(r,1),3);
 [best_lambda,best_lambda_ind]=max(avg_r);
 
 %% Plot correlations vs lambdas
-figure(1)
+figure
+title('correlations vs lambdas');
 plot(avg_r); hold on;
 scatter(best_lambda_ind,best_lambda); hold off;
 xticklabels(num2cell(lambdas))
@@ -44,14 +45,16 @@ ylabel('Average Correlation (r)')
 selected_electrode=49;
 avg_model=squeeze(mean(model(:,best_lambda_ind,:,selected_electrode),1)); % average across trials
 
-figure(2)
+figure
+title('TRF model weights for a selected electrode')
 t=(0:size(model,3)-1)/128;
 plot(t,avg_model)
 xlabel('Lags')
 ylabel('Weights')
 
 %% plot average TRF model weights for all electrodes and best lambda
-figure(3)
+figure
+title('TRF model weights for all electrodes')
 t=(0:size(model,3)-1)/128;
 avg_model=squeeze(mean(model(:,best_lambda_ind,:,:),1)); % average across trials
 plot(t,avg_model)
@@ -67,10 +70,12 @@ load([study_path '128chanlocs.mat']);
 selected_lag=10;
 avg_model=squeeze(mean(model(:,best_lambda_ind,selected_lag,:),1)); % average across trials
 
-figure(4)
-topoplot(avg_model,chanlocs)
+figure
+title('TRF model weights for a selected timelag')
+topoplot(avg_model,chanlocs); colorbar;
 
 %% plot correlation topoplot
-figure(5)
+figure
+title('Predicition accuray')
 r_topo=squeeze(mean(r(:,best_lambda_ind,:),1));
-topoplot(r_topo,chanlocs);
+topoplot(r_topo,chanlocs); colorbar;
