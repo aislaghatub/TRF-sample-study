@@ -7,7 +7,7 @@ eeglab
 subject_name='EL'; 
 mat_file_path=[study_path 'eegMatFiles\'];
 load([mat_file_path subject_name '.mat'])
-
+ref_type = 'mast'; % or 'avg'
 % you SHOULD plot the data in eeglab GUI: type 'eeglab redraw' in Command
 % Window->Plot->Channel Data (Scroll) 
 
@@ -22,7 +22,8 @@ EEG = pop_resample( EEG, 128);
 
 %% save external electrodes (mastoids) separately from cortical electrodes
 EEG.external_electrodes=EEG.data(129:end,:); % save external electrodes (mastoids) separately from cortical electrodes
-EEG = pop_select( EEG,'channel', [1:128]); % keep only cortical channels; this will erase mastoids from the EEG.data sttructure
+% EEG = pop_select( EEG,'channel', [1:128]); % keep only cortical channels; this will erase mastoids from the EEG.data sttructure
+EEG = pop_select( EEG,'channel', [1:128]); % keep cortical and mastoid channels; 
 
 %% Load electrode channel locations from a file
 load([study_path '128chanlocs.mat'])
@@ -41,7 +42,12 @@ EEG = pop_select( EEG,'nochannel',bad_chans);
 EEG = pop_interp(EEG, chanlocs, 'spherical'); 
 
 %% reference to average of all electrodes 
-EEG = pop_reref( EEG, []);
+% EEG = pop_reref( EEG, []);
+
+% reference to mastoids
+tmp = EEG.data';
+refEEG = tmp-repmat(squeeze(mean(EEG.external_electrodes)'),[1,128]); 
+EEG.data=refEEG';       
 
 % again we can plot the data
 %type 'eeglab redraw' in Command Window->Plot->Channel Data (Scroll) 
@@ -81,4 +87,4 @@ EEG.epochdescription=epoch_trig_types;
 %% save preprocessed eeg
 mat_file_path_preprocessed=[study_path 'eegMatFiles_preprocessed\'];
 if ~exist(mat_file_path_preprocessed, 'dir'); mkdir(mat_file_path_preprocessed); end % create folder if does not exist
-save([mat_file_path_preprocessed subject_name '.mat'], 'EEG','-v7.3') % save eeg data as *.mat
+save([mat_file_path_preprocessed subject_name '_' ref_type '.mat'], 'EEG','-v7.3') % save eeg data as *.mat
