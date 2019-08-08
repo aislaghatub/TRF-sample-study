@@ -1,14 +1,14 @@
-study_path='G:\My Drive\MATLAB\TRF_sample_study\TRF-sample-study\';
+study_path='C:\Users\aosulli4\Documents\GitHub\TRF-sample-study\';
 
-addpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b'])); % add EEGLAB toolbox path
-rmpath(genpath([study_path 'EEGlabToolbox\eeglab14_1_2b\plugins\Biosig3.3.0\']));
+addpath([study_path 'EEGlabToolbox\eeglab14_1_2b']); % add EEGLAB toolbox path
+eeglab
 
 %% load EEG
 subject_name='EL'; 
 mat_file_path=[study_path 'eegMatFiles\'];
 load([mat_file_path subject_name '.mat'])
 
-% you can plot the data anytime in eeglab GUI: type 'eeglab redraw' in Command
+% you SHOULD plot the data in eeglab GUI: type 'eeglab redraw' in Command
 % Window->Plot->Channel Data (Scroll) 
 
 %% filter eeg data between 2 and 8 hz; 
@@ -35,7 +35,6 @@ indelec1=[]; indelec2=[]; indelec3=[];
 [~, indelec3] = pop_rejchan(EEG, 'elec',1:EEG.nbchan ,'threshold',5,'norm','on','measure','prob');
 bad_chans=unique([indelec1 indelec2 indelec3]); 
 EEG = pop_select( EEG,'nochannel',bad_chans);
-
 
 
 %% Interpolate deleted channels
