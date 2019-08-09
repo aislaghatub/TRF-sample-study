@@ -1,5 +1,14 @@
 TRF Sample Study Help
 
-Please read and follow this tutorial. It will teach you how to read in and process EEG data
+This tutorial is designed to help you learn how to do EEG signal analysis 
+The example data given consists of 15 1 minute trials from a person listening to audio speech
+In brief:
+-> step 1 loads in raw EEG data (.bdf file) and saves it as .mat file
+-> step 2 filters the EEG, downsamples it, removes bad channels, and epochs the data
+-> step 3 runs the TRF to predict the EEG data using the envelope of the speech
+
+Don't treat the code as a black box, play with it and figure out what it is doing where.
+
+This webpage provides a tutorial for EEG data and will help you understand the steps outlined above! 
 https://sccn.ucsd.edu/wiki/EEGLAB_TUTORIAL_OUTLINE
 
