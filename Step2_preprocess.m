@@ -7,7 +7,7 @@ eeglab
 subject_name='EL'; 
 mat_file_path=[study_path 'eegMatFiles\'];
 load([mat_file_path subject_name '.mat'])
-ref_type = 'mast'; % or 'avg'
+
 % you SHOULD plot the data in eeglab GUI: type 'eeglab redraw' in Command
 % Window->Plot->Channel Data (Scroll) 
 
@@ -42,7 +42,8 @@ EEG = pop_select( EEG,'nochannel',bad_chans);
 EEG = pop_interp(EEG, chanlocs, 'spherical'); 
 
 %% reference to average of all electrodes 
-% if statement for referencing 
+% if statement for referencing
+ref_type = 'mast'; % or 'avg'
 if strcmp(ref_type,'avg')
     EEG = pop_reref( EEG, []);
 else
