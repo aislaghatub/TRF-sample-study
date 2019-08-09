@@ -43,7 +43,7 @@ xlabel('Lambda')
 ylabel('Average Correlation (r)')
 
 %% plot average TRF model weights for a selected electrode and best lambda
-selected_electrode=49;
+selected_electrode=111; %85; %49;
 avg_model=squeeze(mean(model(:,best_lambda_ind,:,selected_electrode),1)); % average across trials
 
 figure
