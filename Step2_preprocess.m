@@ -42,16 +42,18 @@ EEG = pop_select( EEG,'nochannel',bad_chans);
 EEG = pop_interp(EEG, chanlocs, 'spherical'); 
 
 %% reference to average of all electrodes 
-% EEG = pop_reref( EEG, []);
-
-% reference to mastoids
-tmp = EEG.data';
-refEEG = tmp-repmat(squeeze(mean(EEG.external_electrodes)'),[1,128]); 
-EEG.data=refEEG';       
+% if statement for referencing 
+if strcmp(ref_type,'avg')
+    EEG = pop_reref( EEG, []);
+else
+    % reference to mastoids
+    tmp = EEG.data';
+    refEEG = tmp-repmat(squeeze(mean(EEG.external_electrodes)'),[1,128]); 
+    EEG.data=refEEG';       
+end
 
 % again we can plot the data
 %type 'eeglab redraw' in Command Window->Plot->Channel Data (Scroll) 
-
 
 %% Select trigger that will be used for epoching
 min_trial_number=1;
